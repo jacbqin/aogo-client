@@ -8,6 +8,11 @@ export type Aogo = {
       "value": "\"Global\""
     },
     {
+      "name": "USER_SEED",
+      "type": "string",
+      "value": "\"User\""
+    },
+    {
       "name": "VAULT_SEED",
       "type": "string",
       "value": "\"Vault\""
@@ -91,6 +96,11 @@ export type Aogo = {
         },
         {
           "name": "globalAccount",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "userAccount",
           "isMut": true,
           "isSigner": false
         },
@@ -272,6 +282,18 @@ export type Aogo = {
           }
         ]
       }
+    },
+    {
+      "name": "userAccount",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "claimed",
+            "type": "u64"
+          }
+        ]
+      }
     }
   ],
   "events": [
@@ -299,18 +321,13 @@ export type Aogo = {
   "errors": [
     {
       "code": 6000,
-      "name": "InvalidTokenAmount",
-      "msg": "invalid token amount"
-    },
-    {
-      "code": 6001,
       "name": "InvalidSignature",
       "msg": "invalid signature."
     },
     {
-      "code": 6002,
-      "name": "InvalidLevel",
-      "msg": "invalid level."
+      "code": 6001,
+      "name": "DuplicateClaim",
+      "msg": "duplicate claim."
     }
   ]
 };
@@ -325,6 +342,11 @@ export const IDL: Aogo = {
       "value": "\"Global\""
     },
     {
+      "name": "USER_SEED",
+      "type": "string",
+      "value": "\"User\""
+    },
+    {
       "name": "VAULT_SEED",
       "type": "string",
       "value": "\"Vault\""
@@ -408,6 +430,11 @@ export const IDL: Aogo = {
         },
         {
           "name": "globalAccount",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "userAccount",
           "isMut": true,
           "isSigner": false
         },
@@ -589,6 +616,18 @@ export const IDL: Aogo = {
           }
         ]
       }
+    },
+    {
+      "name": "userAccount",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "claimed",
+            "type": "u64"
+          }
+        ]
+      }
     }
   ],
   "events": [
@@ -616,18 +655,13 @@ export const IDL: Aogo = {
   "errors": [
     {
       "code": 6000,
-      "name": "InvalidTokenAmount",
-      "msg": "invalid token amount"
-    },
-    {
-      "code": 6001,
       "name": "InvalidSignature",
       "msg": "invalid signature."
     },
     {
-      "code": 6002,
-      "name": "InvalidLevel",
-      "msg": "invalid level."
+      "code": 6001,
+      "name": "DuplicateClaim",
+      "msg": "duplicate claim."
     }
   ]
 };

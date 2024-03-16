@@ -42,8 +42,16 @@ export class AogoClient {
         return PublicKey.findProgramAddressSync([Buffer.from("Vault"), mint.toBuffer()], this.program.programId)[0];
     }
 
+    findUserAccountPDA(user: PublicKey) {
+        return PublicKey.findProgramAddressSync([Buffer.from("User"), user.toBuffer()], this.program.programId)[0];
+    }
+
     async queryGlobalAccount() {
         return await this.program.account.globalAccount.fetchNullable(this.findGlobalAccountPDA());
+    }
+
+    async queryUserAccount(user: PublicKey) {
+        return await this.program.account.userAccount.fetchNullable(this.findUserAccountPDA(user));
     }
 
     async queryMetadata(pda: PublicKey) {
@@ -141,6 +149,7 @@ export class AogoClient {
             globalAccount: this.findGlobalAccountPDA(),
             vaultAccount,
             userTokenAccount,
+            userAccount: this.findUserAccountPDA(user.publicKey),
             tokenMint: mint,
             tokenProgram: TOKEN_PROGRAM_ID,
             ixSysvar: anchor.web3.SYSVAR_INSTRUCTIONS_PUBKEY,
