@@ -264,6 +264,57 @@ export type Aogo = {
           "type": "u64"
         }
       ]
+    },
+    {
+      "name": "emergencyWithdraw",
+      "accounts": [
+        {
+          "name": "admin",
+          "isMut": true,
+          "isSigner": true
+        },
+        {
+          "name": "globalAccount",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "vaultAccount",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "tokenMint",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "userTokenAccount",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "tokenProgram",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "systemProgram",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "associatedTokenProgram",
+          "isMut": false,
+          "isSigner": false
+        }
+      ],
+      "args": [
+        {
+          "name": "amount",
+          "type": "u64"
+        }
+      ]
     }
   ],
   "accounts": [
@@ -326,6 +377,11 @@ export type Aogo = {
     },
     {
       "code": 6001,
+      "name": "InvalidAccess",
+      "msg": "invalid access."
+    },
+    {
+      "code": 6002,
       "name": "DuplicateClaim",
       "msg": "duplicate claim."
     }
@@ -598,6 +654,57 @@ export const IDL: Aogo = {
           "type": "u64"
         }
       ]
+    },
+    {
+      "name": "emergencyWithdraw",
+      "accounts": [
+        {
+          "name": "admin",
+          "isMut": true,
+          "isSigner": true
+        },
+        {
+          "name": "globalAccount",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "vaultAccount",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "tokenMint",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "userTokenAccount",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "tokenProgram",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "systemProgram",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "associatedTokenProgram",
+          "isMut": false,
+          "isSigner": false
+        }
+      ],
+      "args": [
+        {
+          "name": "amount",
+          "type": "u64"
+        }
+      ]
     }
   ],
   "accounts": [
@@ -660,6 +767,11 @@ export const IDL: Aogo = {
     },
     {
       "code": 6001,
+      "name": "InvalidAccess",
+      "msg": "invalid access."
+    },
+    {
+      "code": 6002,
       "name": "DuplicateClaim",
       "msg": "duplicate claim."
     }

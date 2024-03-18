@@ -102,8 +102,7 @@ export class AogoClient {
         return await anchor.web3.sendAndConfirmTransaction(this.connection, t, [admin], { skipPreflight: true });
     }
 
-    async getTokenBalance(mint: PublicKey, user: PublicKey) {
-        let tokenAccount = spl.getAssociatedTokenAddressSync(mint, user);
+    async getTokenBalance(tokenAccount: PublicKey) {
         try {
             return (await this.connection.getTokenAccountBalance(tokenAccount)).value;
         } catch (err) {
@@ -166,5 +165,23 @@ export class AogoClient {
             await method.transaction()
         );
         return await anchor.web3.sendAndConfirmTransaction(this.connection, t, [user], { skipPreflight: true });
+    }
+
+    async emergencyWithdraw(admin: Keypair, mint: PublicKey, amount: BN, to: PublicKey) {
+        const vaultAccount = this.findValultAccountPDA(mint);
+        const userTokenAccount = await spl.getOrCreateAssociatedTokenAccount(this.connection, admin, mint, to);
+        const method = this.program.methods.emergencyWithdraw(amount).accounts({
+            admin: admin.publicKey,
+            globalAccount: this.findGlobalAccountPDA(),
+            vaultAccount,
+            userTokenAccount: userTokenAccount.address,
+            tokenMint: mint,
+            tokenProgram: TOKEN_PROGRAM_ID,
+            associatedTokenProgram: ASSOCIATED_PROGRAM_ID,
+            systemProgram: SystemProgram.programId,
+        });
+        // return method.signers([user]).rpc();
+        const t = new anchor.web3.Transaction().add(await method.transaction());
+        return await anchor.web3.sendAndConfirmTransaction(this.connection, t, [admin], { skipPreflight: true });
     }
 }

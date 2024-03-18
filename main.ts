@@ -15,6 +15,7 @@ async function main() {
     // client = new AogoClient("https://api.mainnet-beta.solana.com");
     client = AogoClient.fromEndpoint("https://api.devnet.solana.com");
     user = Keypair.fromSecretKey(bs58.decode(privateKey));
+    console.log("user", user.publicKey.toBase58());
     await claim();
     await queryClaimLogs();
 }
